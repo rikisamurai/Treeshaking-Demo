@@ -1,9 +1,11 @@
-// src/index.js
-import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
+import App from './App';
 
-const App = () => {
-  return <div>Hello, JSX!</div>;
-};
+const rootElement = document.createElement('div');
+rootElement.id = 'root';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// 将容器元素添加到 body 中
+document.body.appendChild(rootElement);
+
+// 渲染组件到容器中
+ReactDOM.render(<App />, rootElement);
