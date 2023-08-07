@@ -1,5 +1,6 @@
-import styles from "./style.scss";
+import styles from './style.scss';
 
-export default function MainButton() {
+export const MainButton = () => {
+  console.info('main-button');
   return <div className={styles.mainButton}>Main Button</div>;
-}
+};

@@ -1,31 +1,32 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { WebDoctorWebpackPlugin } = require("@web-doctor/webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { WebDoctorWebpackPlugin } = require('@web-doctor/webpack-plugin');
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
     // clean: true,
   },
   devServer: {
-    static: "./dist",
+    static: './dist',
   },
-  devtool: "hidden-source-map",
-  mode: "production",
+  devtool: 'hidden-source-map',
+  mode: 'production',
+  // mode: "development",
   module: {
     rules: [
       {
         test: /\.(?:js|mjs|cjs)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: [
-              "@babel/preset-env",
-              ["@babel/preset-react", { runtime: "automatic" }],
+              '@babel/preset-env',
+              ['@babel/preset-react', { runtime: 'automatic' }],
             ],
           },
         },
@@ -39,33 +40,38 @@ module.exports = {
           //   ? "style-loader"
           //   : MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               // importLoaders: 1,
               modules: {
-                mode: "local",
-                localIdentName: "[name]__[local]--[hash:base64:5]",
+                mode: 'local',
+                localIdentName: '[name]__[local]--[hash:base64:5]',
               },
             },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
           },
         ],
       },
     ],
   },
+  optimization: {
+    // usedExports: false,
+    // providedExports: false,
+    // minimize: true,
+  },
   plugins: [
     new HtmlWebpackPlugin(),
     new WebDoctorWebpackPlugin({
       disableClientServer: false,
-      features: ["bundle", "treeShaking"],
+      features: ['bundle', 'treeShaking'],
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: "[name].css",
-      chunkFilename: "[id].css",
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 };
