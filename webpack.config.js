@@ -63,10 +63,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin(),
-    new WebDoctorWebpackPlugin({
-      disableClientServer: false,
-      features: ['bundle', 'treeShaking'],
-    }),
+    // new WebDoctorWebpackPlugin({
+    //   disableClientServer: false,
+    //   features: ['bundle', 'treeShaking'],
+    // }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
