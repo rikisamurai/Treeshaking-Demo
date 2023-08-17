@@ -14,6 +14,7 @@ module.exports = {
     static: './dist',
   },
   devtool: 'hidden-source-map',
+  // devtool: 'inline-source-map',
   mode: 'production',
   // mode: "development",
   module: {
