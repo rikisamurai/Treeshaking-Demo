@@ -3,10 +3,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebDoctorWebpackPlugin } = require('@web-doctor/webpack-plugin');
 
+// const MODE = 'production';
+const MODE = process.env.DEV ? 'development' : 'production';
+
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    print: './src/page/print.js',
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
@@ -15,8 +21,7 @@ module.exports = {
   },
   devtool: 'hidden-source-map',
   // devtool: 'inline-source-map',
-  mode: 'production',
-  // mode: "development",
+  mode: MODE,
   module: {
     rules: [
       {
@@ -58,21 +63,47 @@ module.exports = {
     ],
   },
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        'lib-react': {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          priority: 0,
+          name: 'lib-react',
+          reuseExistingChunk: true,
+        },
+        'lib-router': {
+          test: /[\\/]node_modules[\\/](react-router|react-router-dom|@remix-run\/router|history)[\\/]/,
+          priority: 0,
+          name: 'lib-router',
+          reuseExistingChunk: true,
+        },
+        'lib-lodash': {
+          test: /[\\/]node_modules[\\/](lodash|lodash-es)[\\/]/,
+          priority: 0,
+          name: 'lib-lodash',
+          reuseExistingChunk: true,
+        },
+      },
+    },
     // usedExports: false,
     // providedExports: false,
     // minimize: true,
   },
   plugins: [
-    new HtmlWebpackPlugin(),
-    // new WebDoctorWebpackPlugin({
-    //   disableClientServer: false,
-    //   features: ['bundle', 'treeShaking'],
-    // }),
+    new HtmlWebpackPlugin({
+      title: 'HtmlWebpackPlugin',
+    }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-  ],
+    process.env.ANALYZE &&
+      new WebDoctorWebpackPlugin({
+        disableClientServer: false,
+        features: ['bundle', 'treeShaking'],
+      }),
+  ].filter(Boolean),
 };

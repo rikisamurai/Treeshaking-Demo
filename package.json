@@ -7,8 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "build-analyze": "ANALYZE=true webpack",
+    "dev-analyze": "ANALYZE=true webpack",
     "watch": "webpack --watch",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "dev": "DEV=true webpack"
   },
   "keywords": [],
   "author": "",

@@ -5,7 +5,9 @@ import { MutationSingleElement } from '../shared/component/mutation-observer/sin
 
 performanceUtils.startMeasure('dynamic');
 // eslint-disable-next-line no-unused-vars
-const { testA } = await import('./dynamic-test/test-a');
+const { testA } = await import(
+  /* webpackChunkName: "test-async" */ './dynamic-test/test-a'
+);
 performanceUtils.endMeasure('dynamic');
 
 export default function App() {
@@ -20,3 +22,5 @@ export default function App() {
     </div>
   );
 }
+
+console.log('prod', process.env.NODE_ENV);

@@ -1,5 +1,6 @@
-import { createRoot } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
+import { camelCase } from 'lodash';
 
 const rootElement = document.createElement('div');
 rootElement.id = 'root';
@@ -10,3 +11,5 @@ document.body.appendChild(rootElement);
 const root = createRoot(rootElement);
 // 渲染组件到容器中
 root.render(<App />);
+
+console.info(camelCase('camel-case'));
