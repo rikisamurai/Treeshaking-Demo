@@ -5,12 +5,12 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "build-analyze": "ANALYZE=true webpack",
-    "dev-analyze": "ANALYZE=true webpack",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "build-analyze": "NODE_ENV=production ANALYZE=true webpack --config webpack.prod.js",
     "watch": "webpack --watch",
-    "start": "webpack serve --open",
-    "dev": "DEV=true webpack"
+    "start": "NODE_ENV=development webpack serve --open --config webpack.dev.js",
+    "dev": "NODE_ENV=development webpack --config webpack.dev.js",
+    "dev-analyze": "NODE_ENV=development ANALYZE=true webpack --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@ad/doubiz-components": "0.0.64",
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-react": "^7.22.5",
@@ -39,7 +40,8 @@
     "style-loader": "^3.3.3",
     "webpack": "^5.88.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.9.0"
   },
   "sideEffects": false,
   "browserslist": [

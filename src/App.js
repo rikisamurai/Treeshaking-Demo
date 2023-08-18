@@ -23,4 +23,4 @@ export default function App() {
   );
 }
 
-console.log('prod', process.env.NODE_ENV);
+console.log('process.env', process.env.NODE_ENV);
